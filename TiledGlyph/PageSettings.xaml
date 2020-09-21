@@ -13,13 +13,13 @@
     <Grid Style="{StaticResource ContentRoot}">
 
         <Label Content="Tile Width * Height :" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textboxTileHeight" LostFocus="textboxTileHeight_LostFocus" HorizontalAlignment="Left" Height="23" Margin="252,22,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" />
-        <TextBox x:Name="textboxTileWidth" LostFocus="textboxTileWidth_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="171,22,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1"/>
+        <TextBox x:Name="textboxTileHeight" LostFocus="textboxTileHeight_LostFocus" HorizontalAlignment="Left" Height="23" Margin="257,22,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Width="89" MaxLength="4" MaxLines="1" />
+        <TextBox x:Name="textboxTileWidth" LostFocus="textboxTileWidth_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="171,22,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Width="81" MaxLength="4" MaxLines="1"/>
         <Label Content="Image Width * Height :" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textboxImageWidth" HorizontalAlignment="Left" Height="23" Margin="171,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="66" MaxLength="5" MaxLines="1" LostFocus="textboxImageWidth_LostFocus"/>
-        <TextBox x:Name="textboxImageHeight" HorizontalAlignment="Left" Height="23" Margin="252,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="66" MaxLength="5" MaxLines="1" LostFocus="textboxImageHeight_LostFocus"/>
-        <CheckBox x:Name="checkboxUseUHeight" Content="Use Unlimited Height" HorizontalAlignment="Left" Margin="338,25,0,0" VerticalAlignment="Top" Checked="checkboxUseUHeight_Checked" Unchecked="checkboxUseUHeight_UnChecked"/>
-        <ComboBox x:Name="comboboxRenderMode" HorizontalAlignment="Left" Margin="171,104,0,0" VerticalAlignment="Top" Width="147" SelectionChanged="comboboxRenderMode_SelectionChanged">
+        <TextBox x:Name="textboxImageWidth" HorizontalAlignment="Left" Height="23" Margin="171,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="81" MaxLength="5" MaxLines="1" LostFocus="textboxImageWidth_LostFocus"/>
+        <TextBox x:Name="textboxImageHeight" HorizontalAlignment="Left" Height="23" Margin="257,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="89" MaxLength="5" MaxLines="1" LostFocus="textboxImageHeight_LostFocus"/>
+        <CheckBox x:Name="checkboxUseUHeight" Content="Use Unlimited Height" HorizontalAlignment="Left" Margin="360,25,0,0" VerticalAlignment="Top" Checked="checkboxUseUHeight_Checked" Unchecked="checkboxUseUHeight_UnChecked"/>
+        <ComboBox x:Name="comboboxRenderMode" HorizontalAlignment="Left" Margin="171,130,0,0" VerticalAlignment="Top" Width="147" SelectionChanged="comboboxRenderMode_SelectionChanged">
             <ComboBoxItem Content="Normal" HorizontalAlignment="Left" Width="147" IsSelected="True"/>
             <ComboBoxItem Content="NearestNeighbor" HorizontalAlignment="Left" Width="147"/>
             <ComboBoxItem Content="Draw Outline" HorizontalAlignment="Left" Width="147"/>
@@ -27,20 +27,20 @@
             <ComboBoxItem Content="No Smoothing" HorizontalAlignment="Left" Width="147"/>
             <ComboBoxItem Content="Custom1" HorizontalAlignment="Left" Width="147"/>
         </ComboBox>
-        <Label Content="Rendering Mode" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"/>
-        <Label Content="Pen Brush Color" HorizontalAlignment="Left" Margin="10,193,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textboxPenBrushColor" HorizontalAlignment="Left" Height="23" Margin="320,190,0,0" TextWrapping="Wrap" Text="#FFFFFF" VerticalAlignment="Top" Width="79" MaxLength="10" MaxLines="1"/>
-        <Label Content="Background Color" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textboxBgBrushColor" HorizontalAlignment="Left" Height="23" Margin="320,230,0,0" TextWrapping="Wrap" Text="#000000" VerticalAlignment="Top" Width="79" MaxLength="10" MaxLines="1"/>
-        <Label Content="TTF Font Name" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textbox_FontName" HorizontalAlignment="Left" Height="23" Margin="171,334,0,0" TextWrapping="Wrap" Text="/Font/NotoSansCJKsc-Regular.otf" VerticalAlignment="Top" Width="147"/>
-        <mui:ModernButton x:Name="buttonChooseFont" Content="Select TTF Font " HorizontalAlignment="Left" Margin="338,333,0,0" VerticalAlignment="Top" Click="buttonChooseFont_Click"/>
-        <Label Content="Image Format" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rendering Mode" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pen Brush Color" HorizontalAlignment="Left" Margin="22,237,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textboxPenBrushColor" HorizontalAlignment="Left" Height="23" Margin="332,234,0,0" TextWrapping="Wrap" Text="#FFFFFF" VerticalAlignment="Top" Width="79" MaxLength="10" MaxLines="1"/>
+        <Label Content="Background Color" HorizontalAlignment="Left" Margin="22,274,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textboxBgBrushColor" HorizontalAlignment="Left" Height="23" Margin="332,274,0,0" TextWrapping="Wrap" Text="#000000" VerticalAlignment="Top" Width="79" MaxLength="10" MaxLines="1"/>
+        <Label Content="TTF Font Name" HorizontalAlignment="Left" Margin="22,365,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox_FontName" HorizontalAlignment="Left" Height="23" Margin="183,362,0,0" TextWrapping="Wrap" Text="/Font/NotoSansCJKsc-Regular.otf" VerticalAlignment="Top" Width="239"/>
+        <mui:ModernButton x:Name="buttonChooseFont" Content="Select TTF Font " HorizontalAlignment="Left" Margin="437,362,0,0" VerticalAlignment="Top" Click="buttonChooseFont_Click"/>
+        <Label Content="Image Format" HorizontalAlignment="Left" Margin="22,407,0,0" VerticalAlignment="Top"/>
         <mui:ModernButton x:Name="buttonRefresh" Content="Force Refresh" HorizontalAlignment="Left" Margin="549,221,0,0" VerticalAlignment="Top" Click="buttonRefresh_Click"/>
-        <TextBox x:Name="textboxFontHeight" LostFocus="textboxFontHeight_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="415,58,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" TextChanged="TextboxFontHeight_TextChanged"/>
-        <Label Content="Font Size:" HorizontalAlignment="Left" Margin="338,61,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textboxFontHeight" LostFocus="textboxFontHeight_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="437,58,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" />
+        <Label Content="Font Size:" HorizontalAlignment="Left" Margin="360,61,0,0" VerticalAlignment="Top"/>
 
-        <xctk:ColorPicker x:Name="penColorPicker" SelectedColorChanged="penColorPicker_SelectedColorChanged"  HorizontalAlignment="Left" Margin="171,190,0,0" VerticalAlignment="Top" Width="108" BorderBrush="Black" Height="23" ColorMode="ColorPalette" Foreground="#FF686868">
+        <xctk:ColorPicker x:Name="penColorPicker" SelectedColorChanged="penColorPicker_SelectedColorChanged"  HorizontalAlignment="Left" Margin="183,234,0,0" VerticalAlignment="Top" Width="108" BorderBrush="Black" Height="23" ColorMode="ColorPalette" Foreground="#FF686868">
             <xctk:ColorPicker.ButtonStyle>
                 <Style TargetType="{x:Type ToggleButton}">
                     <Setter Property="Template">
@@ -83,7 +83,7 @@
                 <SolidColorBrush Color="#FF383838"/>
             </xctk:ColorPicker.Background>
         </xctk:ColorPicker>
-        <xctk:ColorPicker x:Name="bgColorPicker" SelectedColorChanged="bgColorPicker_SelectedColorChanged" HorizontalAlignment="Left" Margin="171,230,0,0" VerticalAlignment="Top" Width="108" BorderBrush="Black" Height="23" ColorMode="ColorPalette" Foreground="#FF686868" Background="#FF383838" SelectedColor="#00000000">
+        <xctk:ColorPicker x:Name="bgColorPicker" SelectedColorChanged="bgColorPicker_SelectedColorChanged" HorizontalAlignment="Left" Margin="183,274,0,0" VerticalAlignment="Top" Width="108" BorderBrush="Black" Height="23" ColorMode="ColorPalette" Foreground="#FF686868" Background="#FF383838" SelectedColor="#00000000">
             <xctk:ColorPicker.ButtonStyle>
                 <Style TargetType="{x:Type ToggleButton}">
                     <Setter Property="Template">
@@ -123,17 +123,17 @@
                 </Style>
             </xctk:ColorPicker.ButtonStyle>
         </xctk:ColorPicker>
-        <ComboBox x:Name="comboboxSaveImageType" HorizontalAlignment="Left" Margin="171,376,0,0" VerticalAlignment="Top" Width="147" SelectionChanged="comboboxSaveImageType_SelectionChanged">
+        <ComboBox x:Name="comboboxSaveImageType" HorizontalAlignment="Left" Margin="183,404,0,0" VerticalAlignment="Top" Width="147" SelectionChanged="comboboxSaveImageType_SelectionChanged">
             <ComboBoxItem Content="PNG" HorizontalAlignment="Left" Width="147" IsSelected="True"/>
             <ComboBoxItem Content="BMP" HorizontalAlignment="Left" Width="147"/>
         </ComboBox>
-        <Label Content="Relative position :" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textboxRPositionX" LostFocus="textboxRPositionX_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="171,140,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1"/>
-        <TextBox x:Name="textboxRpositionY" LostFocus="textboxRpositionY_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="252,140,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1"/>
-        <CheckBox x:Name="checkboxOptmizeAlpha" Content="Optmize Alpha" HorizontalAlignment="Left" Margin="338,380,0,0" VerticalAlignment="Top" Checked="checkboxOptmizeAlpha_Checked" Unchecked="checkboxOptmizeAlpha_Unchecked"/>
-        <Label Content="Outline Color " HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textboxOutlineBrushColor" HorizontalAlignment="Left" Height="23" Margin="320,277,0,0" TextWrapping="Wrap" Text="#202020" VerticalAlignment="Top" Width="79" MaxLength="10" MaxLines="1"/>
-        <xctk:ColorPicker x:Name="outlineColorPicker" SelectedColorChanged="outlineColorPicker_SelectedColorChanged" HorizontalAlignment="Left" Margin="171,277,0,0" VerticalAlignment="Top" Width="108" BorderBrush="Black" Height="23" ColorMode="ColorPalette" Foreground="#FF686868" Background="#FF383838" SelectedColor="#FF3C3C3C">
+        <Label Content="Relative position :" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textboxRPositionX" LostFocus="textboxRPositionX_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="171,166,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1"/>
+        <TextBox x:Name="textboxRpositionY" LostFocus="textboxRpositionY_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="252,166,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1"/>
+        <CheckBox x:Name="checkboxOptmizeAlpha" Content="Optmize Alpha" HorizontalAlignment="Left" Margin="350,408,0,0" VerticalAlignment="Top" Checked="checkboxOptmizeAlpha_Checked" Unchecked="checkboxOptmizeAlpha_Unchecked"/>
+        <Label Content="Outline Color " HorizontalAlignment="Left" Margin="22,321,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textboxOutlineBrushColor" HorizontalAlignment="Left" Height="23" Margin="332,321,0,0" TextWrapping="Wrap" Text="#202020" VerticalAlignment="Top" Width="79" MaxLength="10" MaxLines="1"/>
+        <xctk:ColorPicker x:Name="outlineColorPicker" SelectedColorChanged="outlineColorPicker_SelectedColorChanged" HorizontalAlignment="Left" Margin="183,321,0,0" VerticalAlignment="Top" Width="108" BorderBrush="Black" Height="23" ColorMode="ColorPalette" Foreground="#FF686868" Background="#FF383838" SelectedColor="#FF3C3C3C">
             <xctk:ColorPicker.ButtonStyle>
                 <Style TargetType="{x:Type ToggleButton}">
                     <Setter Property="Template">
@@ -173,12 +173,20 @@
                 </Style>
             </xctk:ColorPicker.ButtonStyle>
         </xctk:ColorPicker>
-        <TextBox x:Name="textboxFontBold" LostFocus="textboxFontBold_LostFocus"   HorizontalAlignment="Left" Height="23" Margin="415,104,0,0" TextWrapping="Wrap" Text="0.4" VerticalAlignment="Top" Width="66" SelectionOpacity="2"/>
-        <Label Content="Font Bold:" HorizontalAlignment="Left" Margin="338,107,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkboxUseOutlineEffect" Content="Use Outline Effect" HorizontalAlignment="Left" Margin="338,142,0,0" VerticalAlignment="Top" Checked="checkboxUseOutlineEffect_Checked" Unchecked="checkboxUseOutlineEffect_Unchecked"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="171,421,0,0" VerticalAlignment="Top" Width="91" Height="37" Click="Button_Click"/>
-        <Button Content="Load" Drop="UIElement_OnDrop" AllowDrop="True" HorizontalAlignment="Left" Margin="51,421,0,0" VerticalAlignment="Top" Width="91" Height="37" Click="Button_Click_1"/>
-        <TextBox x:Name="textBoxJsonPath" HorizontalAlignment="Left" Height="23" Margin="279,428,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="253"/>
+        <TextBox x:Name="textboxFontBold" LostFocus="textboxFontBold_LostFocus"   HorizontalAlignment="Left" Height="23" Margin="437,130,0,0" TextWrapping="Wrap" Text="0.4" VerticalAlignment="Top" Width="66" SelectionOpacity="2" />
+        <Label Content="Font Bold:" HorizontalAlignment="Left" Margin="360,133,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkboxUseOutlineEffect" Content="Use Outline Effect" HorizontalAlignment="Left" Margin="360,168,0,0" VerticalAlignment="Top" Checked="checkboxUseOutlineEffect_Checked" Unchecked="checkboxUseOutlineEffect_Unchecked" Height="21" Width="124"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="158,464,0,0" VerticalAlignment="Top" Width="91" Height="37" Click="Button_Click"/>
+        <Button Content="Load" Drop="UIElement_OnDrop" AllowDrop="True" HorizontalAlignment="Left" Margin="38,464,0,0" VerticalAlignment="Top" Width="91" Height="37" Click="Button_Click_1"/>
+        <TextBox x:Name="textBoxJsonPath" HorizontalAlignment="Left" Height="23" Margin="265,471,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="290"/>
+        <TextBox x:Name="textboxFontHeight2" LostFocus="textboxFontHeight2_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="437,91,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" />
+        <Label Content="Font Size2:" HorizontalAlignment="Left" Margin="360,94,0,0" VerticalAlignment="Top"/>
+        <Label Content="Font Size2 Start End Index" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textboxFontSize2_start" HorizontalAlignment="Left" Height="23" Margin="171,91,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="81" MaxLength="5" MaxLines="1" TextChanged="TextboxFontSize2_start_TextChanged"/>
+        <TextBox x:Name="textboxFontSize2_End" HorizontalAlignment="Left" Height="23" Margin="257,91,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="89" MaxLength="5" MaxLines="1"  TextChanged="TextboxFontSize2_End_TextChanged"/>
+        <Label Content="Relative position 2:" HorizontalAlignment="Left" Margin="11,204,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textboxRPositionX2" LostFocus="textboxRPositionX_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="171,201,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" TextChanged="TextboxRPositionX2_TextChanged"/>
+        <TextBox x:Name="textboxRpositionY2" LostFocus="textboxRpositionY_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="252,201,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" RenderTransformOrigin="2.237,0.507" TextChanged="TextboxRpositionY2_TextChanged"/>
 
     </Grid>
 </UserControl>

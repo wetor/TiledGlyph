@@ -31,5 +31,11 @@ namespace TiledGlyph
         public static float iFontBold = (float)0;
         public static int iFontOutline = 2;
         public static bool bUseOutlineEffect = false;
+
+        public static int iFontHeight2 = 20;
+        public static int iFontSizeStartIndex = 0;
+        public static int iFontSizeEndIndex = 5;
+        public static int relativePositionX2 = 0;
+        public static int relativePositionY2 = 0;
     }
 }

@@ -328,6 +328,23 @@ namespace TiledGlyph
             GlobalSettings.iFontHeight = fontHeight;
         }
 
+        private void textboxFontHeight2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string tc = textboxFontHeight2.Text.Trim();
+            if (!checkNumbic(tc))
+            {
+                textboxFontHeight2.Text = "16";
+                return;
+            }
+            int fontHeight = Convert.ToInt32(tc);
+            if (fontHeight > 128)
+            {
+                textboxFontHeight2.Text = "16";
+                return;
+            }
+            GlobalSettings.iFontHeight2 = fontHeight;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var gSettings = new GlobalSettingsJson();
@@ -351,6 +368,13 @@ namespace TiledGlyph
             gSettings.iFontBold = GlobalSettings.iFontBold;
             gSettings.iFontOutline = GlobalSettings.iFontOutline;
             gSettings.bUseOutlineEffect = GlobalSettings.bUseOutlineEffect;
+
+            gSettings.iFontHeight2 = GlobalSettings.iFontHeight2;
+            gSettings.iFontSizeStartIndex = GlobalSettings.iFontSizeStartIndex;
+            gSettings.iFontSizeEndIndex = GlobalSettings.iFontSizeEndIndex;
+            gSettings.relativePositionX2 = GlobalSettings.relativePositionX2;
+            gSettings.relativePositionY2 = GlobalSettings.relativePositionY2;
+
             if (!string.IsNullOrEmpty(textBoxJsonPath.Text))
                 File.WriteAllText(textBoxJsonPath.Text, JsonConvert.SerializeObject(gSettings, Formatting.Indented));
         }
@@ -408,6 +432,17 @@ namespace TiledGlyph
 
                         GlobalSettings.bUseOutlineEffect = gSettings.bUseOutlineEffect;
                         checkboxUseOutlineEffect.IsChecked = gSettings.bUseOutlineEffect;
+
+                        GlobalSettings.iFontHeight2 = gSettings.iFontHeight2;
+                        textboxFontHeight2.Text = gSettings.iFontHeight2.ToString();
+                        GlobalSettings.iFontSizeStartIndex = gSettings.iFontSizeStartIndex;
+                        textboxFontSize2_start.Text = gSettings.iFontSizeStartIndex.ToString();
+                        GlobalSettings.iFontSizeEndIndex = gSettings.iFontSizeEndIndex;
+                        textboxFontSize2_End.Text = gSettings.iFontSizeEndIndex.ToString();
+                        GlobalSettings.relativePositionX2 = gSettings.relativePositionX2;
+                        textboxRPositionX2.Text = gSettings.relativePositionX2.ToString();
+                        GlobalSettings.relativePositionY2 = gSettings.relativePositionY2;
+                        textboxRpositionY2.Text = (gSettings.relativePositionY2).ToString();
                     }
                 }
                 else
@@ -423,9 +458,47 @@ namespace TiledGlyph
 
         }
 
-        private void TextboxFontHeight_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
+        private void TextboxFontSize2_start_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tc = textboxFontSize2_start.Text.Trim();
+            int num = 0;
+            if (int.TryParse(tc, out num))
+            {
+                GlobalSettings.iFontSizeStartIndex = num;
+            }
         }
+
+        private void TextboxFontSize2_End_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tc = textboxFontSize2_End.Text.Trim();
+            int num = 0;
+            if (int.TryParse(tc, out num))
+            {
+                GlobalSettings.iFontSizeEndIndex = num;
+            }
+        }
+
+        private void TextboxRPositionX2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tc = textboxRPositionX2.Text.Trim();
+            int num = 0;
+            if (int.TryParse(tc, out num))
+            {
+                GlobalSettings.relativePositionX2 = num;
+            }
+        }
+
+        private void TextboxRpositionY2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tc = textboxRpositionY2.Text.Trim();
+            int num = 0;
+            if (int.TryParse(tc, out num))
+            {
+                GlobalSettings.relativePositionY2 = num;
+            }
+        }
+
+
     }
 }

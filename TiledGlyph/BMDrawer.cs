@@ -288,10 +288,22 @@ namespace TiledGlyph
             //g.Clear(Color.Black);
             int linecount = 0;
             int x = 0, y = 0;
+            bool isInFontSize2 = false;
             for (int i = 0; i < teststrings.ToCharArray().Length; i++)
             {
                 string currentChar0 = teststrings.ToCharArray()[i].ToString();
                 uint glyphIndex = face.GetCharIndex(uchar2code(currentChar0));
+
+                if (GlobalSettings.iFontSizeStartIndex <= i && GlobalSettings.iFontSizeEndIndex >= i)
+                {
+                    isInFontSize2 = true;
+                    fontHeight = GlobalSettings.iFontHeight2;
+                }
+                else
+                {
+                    isInFontSize2 = false;
+                    fontHeight = GlobalSettings.iFontHeight;
+                }
 
 
 
@@ -325,8 +337,6 @@ namespace TiledGlyph
                 //选择渲染模式（1倍 or 2倍）
                 if (this.grender_mode == "freetype_nearestneighbor")
                 {
-
-
                     face.SetCharSize(0, this.fontHeight * 2, 0, 72);
                     face.LoadGlyph(glyphIndex, LoadFlags.ForceAutohint, LoadTarget.Lcd);
                     face.Glyph.RenderGlyph(RenderMode.Lcd);
@@ -363,7 +373,15 @@ namespace TiledGlyph
                     Bitmap nBmp = gray2alpha(cBmp);
                     cBmp.Dispose();
 
-                    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                    if (!isInFontSize2)
+                    {
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                    }
+                    else
+                    {
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
+                    }
+                  
                     nBmp.Dispose();
                 }
                 else if (this.grender_mode == "freetype_HighQualityBicubic")
@@ -404,7 +422,15 @@ namespace TiledGlyph
                     Bitmap nBmp = gray2alpha(cBmp);
                     cBmp.Dispose();
 
-                    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                    if (!isInFontSize2)
+                    {
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                    }
+                    else
+                    {
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
+                    }
+              
                     nBmp.Dispose();
 
                 }
@@ -460,8 +486,20 @@ namespace TiledGlyph
                         Bitmap nBmp = gray2alpha(cBmp);
                         //Bitmap s2Bmp = gray2alpha(sBmp);
 
-                        g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
-                        g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+            
+                        if (!isInFontSize2)
+                        {
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+
+                        }
+                        else
+                        {
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2 - 1, ky + GlobalSettings.relativePositionY2 - 1);//draw twice
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
+
+                        }
+
                         cBmp.Dispose();
                         nBmp.Dispose();
                         sBmp.Dispose();
@@ -487,8 +525,20 @@ namespace TiledGlyph
                         Bitmap sBmp = ftbmp1.ToGdipBitmap(this.penColor);
                         Bitmap nBmp = gray2alpha(cBmp);
                         sBmp = gray2alpha(sBmp);
-                        g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
-                        g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+
+
+                        if (!isInFontSize2)
+                        {
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+                        }
+                        else
+                        {
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2 - 1, ky + GlobalSettings.relativePositionY2 - 1);//draw twice
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
+
+                        }
+
                         cBmp.Dispose();
                         nBmp.Dispose();
                         sBmp.Dispose();
@@ -525,7 +575,17 @@ namespace TiledGlyph
                         continue;
                     }
                     Bitmap cBmp = ftbmp.ToGdipBitmap(this.penColor);
-                    g.DrawImageUnscaled(cBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+          
+                    if (!isInFontSize2)
+                    {
+                        g.DrawImageUnscaled(cBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+
+                    }
+                    else
+                    {
+                        g.DrawImageUnscaled(cBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
+                    }
+
                     cBmp.Dispose();
                 }
 
@@ -568,10 +628,20 @@ namespace TiledGlyph
                     Bitmap nBmp = gray2alpha(cBmp);
                     cBmp.Dispose();
 
-                    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
-                    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
-                    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
-                    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                    if (!isInFontSize2)
+                    {
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                    }
+                    else
+                    {
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
+                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
+                    }
 
                     nBmp.Dispose();
                     linecount++;
@@ -637,8 +707,20 @@ namespace TiledGlyph
                         Bitmap sBmp = ftbmp1.ToGdipBitmap(GlobalSettings.cShadowColor);
                         Bitmap nBmp = gray2alpha(cBmp);
                         //Bitmap s2Bmp = gray2alpha(sBmp);
-                        g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
-                        g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+                   
+                        if (!isInFontSize2)
+                        {
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+
+                        }
+                        else
+                        {
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2 - 1, ky + GlobalSettings.relativePositionY2 - 1);//draw twice
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
+
+                        }
+
                         cBmp.Dispose();
                         nBmp.Dispose();
                         sBmp.Dispose();
@@ -649,7 +731,16 @@ namespace TiledGlyph
                         Bitmap cBmp = ftbmp.ToGdipBitmap(this.penColor);
                         Bitmap nBmp = gray2alpha(cBmp);
                         cBmp.Dispose();
-                        g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+                     
+                        if (!isInFontSize2)
+                        {
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+                        }
+                        else
+                        {
+                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
+                        }
+
                         nBmp.Dispose();
                     }
 
