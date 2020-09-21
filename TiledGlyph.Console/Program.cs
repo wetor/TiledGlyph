@@ -30,7 +30,7 @@ namespace TiledGlyph.Console
             if (File.Exists(pathJson))
             {
                 gSettings = JsonConvert.DeserializeObject<GlobalSettingsJson>(File.ReadAllText(pathJson));
-                GlobalSettings.iFontHeight = (int)(gSettings.iFontHeight*0.9);
+                GlobalSettings.iFontHeight = gSettings.iFontHeight;
                 GlobalSettings.iTileHeight = gSettings.iTileHeight;
                 GlobalSettings.iTileWidth = gSettings.iTileWidth;
                 GlobalSettings.iImageHeight = gSettings.iImageHeight;
@@ -48,7 +48,7 @@ namespace TiledGlyph.Console
 
 
                 GlobalSettings.relativePositionX = gSettings.relativePositionX;
-                GlobalSettings.relativePositionY = gSettings.relativePositionY-1;
+                GlobalSettings.relativePositionY = gSettings.relativePositionY;
                 GlobalSettings.iFontBold = gSettings.iFontBold;
                 GlobalSettings.iFontOutline = gSettings.iFontOutline;
                 GlobalSettings.bUseOutlineEffect = gSettings.bUseOutlineEffect;
