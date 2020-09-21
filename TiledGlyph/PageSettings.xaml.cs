@@ -12,9 +12,12 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 using Xceed.Wpf.Toolkit;
+using MessageBox = System.Windows.MessageBox;
 
 
 namespace TiledGlyph
@@ -29,7 +32,8 @@ namespace TiledGlyph
             InitializeComponent();
         }
 
-        private bool checkNumbic(string str){
+        private bool checkNumbic(string str)
+        {
             Regex r = new Regex(@"^[0-9]*$");
             if (!r.IsMatch(str))
             {
@@ -122,7 +126,7 @@ namespace TiledGlyph
         private void comboboxRenderMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int currentMode = comboboxRenderMode.SelectedIndex;
-            GlobalSettings.iGRenderMode = currentMode;           
+            GlobalSettings.iGRenderMode = currentMode;
         }
 
         private void buttonRefresh_Click(object sender, RoutedEventArgs e)
@@ -135,7 +139,7 @@ namespace TiledGlyph
             GlobalSettings.iImageWidth = Convert.ToInt32(textboxImageWidth.Text.Trim());
             GlobalSettings.iImageHeight = Convert.ToInt32(textboxImageHeight.Text.Trim());
             GlobalSettings.fFontName = textbox_FontName.Text;
-            
+
 
         }
 
@@ -149,7 +153,7 @@ namespace TiledGlyph
                 System.Drawing.ColorConverter colConvert = new System.Drawing.ColorConverter();
                 System.Drawing.Color color = (System.Drawing.Color)colConvert.ConvertFromString(c);
                 GlobalSettings.cShadowColor = color;
-            } 
+            }
 
         }
 
@@ -178,12 +182,13 @@ namespace TiledGlyph
                 System.Drawing.ColorConverter colConvert = new System.Drawing.ColorConverter();
                 System.Drawing.Color color = (System.Drawing.Color)colConvert.ConvertFromString(c);
                 GlobalSettings.cBgColor = color;
-            } 
+            }
         }
 
         private void checkboxUseUHeight_Checked(object sender, RoutedEventArgs e)
         {
-            if (checkboxUseUHeight.IsChecked == true){
+            if (checkboxUseUHeight.IsChecked == true)
+            {
                 GlobalSettings.bUseUnlimitHeight = true;
             }
         }
@@ -193,7 +198,7 @@ namespace TiledGlyph
             {
                 GlobalSettings.bUseUnlimitHeight = false;
             }
-            
+
         }
 
         private void buttonChooseFont_Click(object sender, RoutedEventArgs e)
@@ -320,9 +325,107 @@ namespace TiledGlyph
                 textboxFontHeight.Text = "16";
                 return;
             }
-            GlobalSettings.iFontHeight = (int)(fontHeight * 0.75);
+            GlobalSettings.iFontHeight = fontHeight;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var gSettings = new GlobalSettingsJson();
+            gSettings.iFontHeight = GlobalSettings.iFontHeight;
+            gSettings.iTileHeight = GlobalSettings.iTileHeight;
+            gSettings.iTileWidth = GlobalSettings.iTileWidth;
+            gSettings.iImageHeight = GlobalSettings.iImageHeight;
+            gSettings.iImageWidth = GlobalSettings.iImageWidth;
+            gSettings.iGRenderMode = GlobalSettings.iGRenderMode;
+            //gSettings.iImageCount = GlobalSettings.iImageCount;
+            //gSettings.cBgColor = GlobalSettings.cBgColor;
+            //gSettings.cPenColor = GlobalSettings.cPenColor;
+            //gSettings.cShadowColor = GlobalSettings.cShadowColor;
+            //gSettings.fTextStrings = GlobalSettings.fTextStrings;
+            gSettings.fFontName = GlobalSettings.fFontName;
+            gSettings.bUseUnlimitHeight = GlobalSettings.bUseUnlimitHeight;
+            gSettings.bOptmizeAlpha = GlobalSettings.bOptmizeAlpha;
+            gSettings.globalSaveFmt = GlobalSettings.globalSaveFmt;
+            gSettings.relativePositionX = GlobalSettings.relativePositionX;
+            gSettings.relativePositionY = GlobalSettings.relativePositionY;
+            gSettings.iFontBold = GlobalSettings.iFontBold;
+            gSettings.iFontOutline = GlobalSettings.iFontOutline;
+            gSettings.bUseOutlineEffect = GlobalSettings.bUseOutlineEffect;
+            if (!string.IsNullOrEmpty(textBoxJsonPath.Text))
+                File.WriteAllText(textBoxJsonPath.Text, JsonConvert.SerializeObject(gSettings, Formatting.Indented));
+        }
 
+        private void UIElement_OnDrop(object sender, DragEventArgs e)
+        {
+            //仅支持文件的拖放
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                return;
+            }
+
+            //获取拖拽的文件
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (files.Length == 1)
+            {
+                if (new FileInfo(files[0]).Name.ToLower().Contains(".json") && File.Exists(files[0]))
+                {
+                    if (File.Exists(files[0]))
+                    {
+                        textBoxJsonPath.Text = files[0];
+                        var gSettings = JsonConvert.DeserializeObject<GlobalSettingsJson>(File.ReadAllText(files[0]));
+                        GlobalSettings.iFontHeight = gSettings.iFontHeight;
+                        textboxFontHeight.Text = gSettings.iFontHeight.ToString();
+                        GlobalSettings.iTileHeight = gSettings.iTileHeight;
+                        textboxTileHeight.Text = gSettings.iTileHeight.ToString();
+                        GlobalSettings.iTileWidth = gSettings.iTileWidth;
+                        textboxTileWidth.Text = gSettings.iTileWidth.ToString();
+                        GlobalSettings.iImageHeight = gSettings.iImageHeight;
+                        textboxImageHeight.Text = gSettings.iImageHeight.ToString();
+                        GlobalSettings.iImageWidth = gSettings.iImageWidth;
+                        textboxImageWidth.Text = gSettings.iImageWidth.ToString();
+                        GlobalSettings.iGRenderMode = gSettings.iGRenderMode;
+                        comboboxRenderMode.SelectedIndex = gSettings.iGRenderMode;
+                        //GlobalSettings.iImageCount = gSettings.iImageCount;
+                        //GlobalSettings.cBgColor = gSettings.cBgColor;
+                        //GlobalSettings.cPenColor = gSettings.cPenColor;
+                        //GlobalSettings.cShadowColor = gSettings.cShadowColor;
+                        //GlobalSettings.fTextStrings = gSettings.fTextStrings;
+                        GlobalSettings.fFontName = gSettings.fFontName;
+                        textbox_FontName.Text = gSettings.fFontName;
+                        GlobalSettings.bUseUnlimitHeight = gSettings.bUseUnlimitHeight;
+                        checkboxUseUHeight.IsChecked = gSettings.bUseOutlineEffect;
+                        GlobalSettings.bOptmizeAlpha = gSettings.bOptmizeAlpha;
+                        checkboxOptmizeAlpha.IsChecked = gSettings.bOptmizeAlpha;
+                        GlobalSettings.globalSaveFmt = gSettings.globalSaveFmt;
+                        GlobalSettings.relativePositionX = gSettings.relativePositionX;
+                        textboxRPositionX.Text = gSettings.relativePositionX.ToString();
+                        GlobalSettings.relativePositionY = gSettings.relativePositionY;
+                        textboxRpositionY.Text = (gSettings.relativePositionY).ToString();
+                        GlobalSettings.iFontBold = gSettings.iFontBold;
+                        textboxFontBold.Text = gSettings.iFontBold.ToString();
+                        GlobalSettings.iFontOutline = gSettings.iFontOutline;
+
+                        GlobalSettings.bUseOutlineEffect = gSettings.bUseOutlineEffect;
+                        checkboxUseOutlineEffect.IsChecked = gSettings.bUseOutlineEffect;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("拖入的只能是对应的json文件");
+                }
+
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextboxFontHeight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

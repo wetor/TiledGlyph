@@ -16,8 +16,8 @@
         <TextBox x:Name="textboxTileHeight" LostFocus="textboxTileHeight_LostFocus" HorizontalAlignment="Left" Height="23" Margin="252,22,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" />
         <TextBox x:Name="textboxTileWidth" LostFocus="textboxTileWidth_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="171,22,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1"/>
         <Label Content="Image Width * Height :" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textboxImageWidth" HorizontalAlignment="Left" Height="23" Margin="171,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" LostFocus="textboxImageWidth_LostFocus"/>
-        <TextBox x:Name="textboxImageHeight" HorizontalAlignment="Left" Height="23" Margin="252,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" LostFocus="textboxImageHeight_LostFocus"/>
+        <TextBox x:Name="textboxImageWidth" HorizontalAlignment="Left" Height="23" Margin="171,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="66" MaxLength="5" MaxLines="1" LostFocus="textboxImageWidth_LostFocus"/>
+        <TextBox x:Name="textboxImageHeight" HorizontalAlignment="Left" Height="23" Margin="252,58,0,0" TextWrapping="Wrap" Text="512" VerticalAlignment="Top" Width="66" MaxLength="5" MaxLines="1" LostFocus="textboxImageHeight_LostFocus"/>
         <CheckBox x:Name="checkboxUseUHeight" Content="Use Unlimited Height" HorizontalAlignment="Left" Margin="338,25,0,0" VerticalAlignment="Top" Checked="checkboxUseUHeight_Checked" Unchecked="checkboxUseUHeight_UnChecked"/>
         <ComboBox x:Name="comboboxRenderMode" HorizontalAlignment="Left" Margin="171,104,0,0" VerticalAlignment="Top" Width="147" SelectionChanged="comboboxRenderMode_SelectionChanged">
             <ComboBoxItem Content="Normal" HorizontalAlignment="Left" Width="147" IsSelected="True"/>
@@ -25,6 +25,7 @@
             <ComboBoxItem Content="Draw Outline" HorizontalAlignment="Left" Width="147"/>
             <ComboBoxItem Content="HighQualityBicubic" HorizontalAlignment="Left" Width="147"/>
             <ComboBoxItem Content="No Smoothing" HorizontalAlignment="Left" Width="147"/>
+            <ComboBoxItem Content="Custom1" HorizontalAlignment="Left" Width="147"/>
         </ComboBox>
         <Label Content="Rendering Mode" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"/>
         <Label Content="Pen Brush Color" HorizontalAlignment="Left" Margin="10,193,0,0" VerticalAlignment="Top"/>
@@ -36,7 +37,7 @@
         <mui:ModernButton x:Name="buttonChooseFont" Content="Select TTF Font " HorizontalAlignment="Left" Margin="338,333,0,0" VerticalAlignment="Top" Click="buttonChooseFont_Click"/>
         <Label Content="Image Format" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top"/>
         <mui:ModernButton x:Name="buttonRefresh" Content="Force Refresh" HorizontalAlignment="Left" Margin="549,221,0,0" VerticalAlignment="Top" Click="buttonRefresh_Click"/>
-        <TextBox x:Name="textboxFontHeight" LostFocus="textboxFontHeight_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="415,58,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1"/>
+        <TextBox x:Name="textboxFontHeight" LostFocus="textboxFontHeight_LostFocus"  HorizontalAlignment="Left" Height="23" Margin="415,58,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="66" MaxLength="4" MaxLines="1" TextChanged="TextboxFontHeight_TextChanged"/>
         <Label Content="Font Size:" HorizontalAlignment="Left" Margin="338,61,0,0" VerticalAlignment="Top"/>
 
         <xctk:ColorPicker x:Name="penColorPicker" SelectedColorChanged="penColorPicker_SelectedColorChanged"  HorizontalAlignment="Left" Margin="171,190,0,0" VerticalAlignment="Top" Width="108" BorderBrush="Black" Height="23" ColorMode="ColorPalette" Foreground="#FF686868">
@@ -175,6 +176,9 @@
         <TextBox x:Name="textboxFontBold" LostFocus="textboxFontBold_LostFocus"   HorizontalAlignment="Left" Height="23" Margin="415,104,0,0" TextWrapping="Wrap" Text="0.4" VerticalAlignment="Top" Width="66" SelectionOpacity="2"/>
         <Label Content="Font Bold:" HorizontalAlignment="Left" Margin="338,107,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkboxUseOutlineEffect" Content="Use Outline Effect" HorizontalAlignment="Left" Margin="338,142,0,0" VerticalAlignment="Top" Checked="checkboxUseOutlineEffect_Checked" Unchecked="checkboxUseOutlineEffect_Unchecked"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="171,421,0,0" VerticalAlignment="Top" Width="91" Height="37" Click="Button_Click"/>
+        <Button Content="Load" Drop="UIElement_OnDrop" AllowDrop="True" HorizontalAlignment="Left" Margin="51,421,0,0" VerticalAlignment="Top" Width="91" Height="37" Click="Button_Click_1"/>
+        <TextBox x:Name="textBoxJsonPath" HorizontalAlignment="Left" Height="23" Margin="279,428,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="253"/>
 
     </Grid>
 </UserControl>
