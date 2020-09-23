@@ -110,11 +110,21 @@ namespace TiledGlyph
                             DrawingVisual drawingVisual = new DrawingVisual();
                             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
                             {
+                                //放大比例
+                                double rate = 1f;
+                                PresentationSource source = PresentationSource.FromVisual(this);
+                                double dpiX =0f, dpiY =0f;
+                                if (source != null)
+                                {
+                                    dpiX = 96.0 * source.CompositionTarget.TransformToDevice.M11;
+                                    dpiY = 96.0 * source.CompositionTarget.TransformToDevice.M22;
+                                }
+                                rate = dpiX / 96d;
                                 //
                                 // ... draw on the drawingContext
                                 //
                                 System.Windows.Media.Pen pen = new System.Windows.Media.Pen(System.Windows.Media.Brushes.Red, (double)0.3f);
-                                drawingContext.DrawImage(image.Source, new Rect(0, 0, image.Source.Width, image.Source.Height));
+                                drawingContext.DrawImage(image.Source, new Rect(0, 0, image.Source.Width* rate, image.Source.Height* rate));
                                 int x_lines = (int)Math.Round((float)(int)image.Width / (float)GlobalSettings.iTileWidth);
 
                                 int y_lines = (int)Math.Round((float)(int)image.Height / (float)GlobalSettings.iTileHeight); ;
@@ -129,7 +139,7 @@ namespace TiledGlyph
                                         new System.Windows.Point((float)(int)image.Width, i * GlobalSettings.iTileHeight));
                                 }
                                 drawingContext.Close();
-                                RenderTargetBitmap nbmp = new RenderTargetBitmap((int)image.Width, (int)image.Height, 96.0, 96.0, PixelFormats.Default);
+                                RenderTargetBitmap nbmp = new RenderTargetBitmap((int)(image.Width * rate), (int)(image.Height * rate), 96.0* rate* rate, 96.0 * rate * rate, PixelFormats.Default);
                                 nbmp.Render(drawingVisual);
                                 image.Source = nbmp;
                             }

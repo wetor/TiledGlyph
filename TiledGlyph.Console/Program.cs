@@ -35,7 +35,7 @@ namespace TiledGlyph.Console
                 GlobalSettings.iTileWidth = gSettings.iTileWidth;
                 GlobalSettings.iImageHeight = gSettings.iImageHeight;
                 GlobalSettings.iImageWidth = gSettings.iImageWidth;
-                GlobalSettings.iGRenderMode = gSettings.iGRenderMode;
+                GlobalSettings.iGRenderMode = 0;//gSettings.iGRenderMode;
                 GlobalSettings.iImageCount = gSettings.iImageCount;
                 GlobalSettings.cBgColor = gSettings.cBgColor;
                 GlobalSettings.cPenColor = gSettings.cPenColor;
@@ -50,8 +50,15 @@ namespace TiledGlyph.Console
                 GlobalSettings.relativePositionX = gSettings.relativePositionX;
                 GlobalSettings.relativePositionY = gSettings.relativePositionY;
                 GlobalSettings.iFontBold = gSettings.iFontBold;
+
                 GlobalSettings.iFontOutline = gSettings.iFontOutline;
                 GlobalSettings.bUseOutlineEffect = gSettings.bUseOutlineEffect;
+
+                GlobalSettings.iFontSizeStartIndex = gSettings.iFontSizeStartIndex;
+                GlobalSettings.iFontSizeEndIndex = gSettings.iFontSizeEndIndex;
+                GlobalSettings.relativePositionX2 = gSettings.relativePositionX2;
+                GlobalSettings.relativePositionY2 = gSettings.relativePositionY2;
+                GlobalSettings.iFontHeight2 = gSettings.iFontHeight2;
             }
             else
             {
