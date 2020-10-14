@@ -7,7 +7,7 @@
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         mc:Ignorable="d"
         Title="Tiled Glyph (Bitmap Font Generator)" IsTitleVisible="True"
-        Height="685" Width="850" MinWidth="850" MinHeight="480"
+        Height="685" Width="1183.147" MinWidth="850" MinHeight="480"
         ContentSource="/PagePrev.xaml" WindowStyle="None" ResizeMode="CanMinimize">
     <mui:ModernWindow.Effect>
         <DropShadowEffect/>

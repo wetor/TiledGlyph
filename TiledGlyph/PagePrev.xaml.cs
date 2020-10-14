@@ -99,27 +99,28 @@ namespace TiledGlyph
                         //新开一个线程池执行draw
                         BMDrawer bmd = new BMDrawer();
                         string teststrings = characterTextBox.Text;
+                        //放大比例
+                        double rate = 1f;
+                        PresentationSource source = PresentationSource.FromVisual(this);
+                        double dpiX = 0f, dpiY = 0f;
+                        if (source != null)
+                        {
+                            dpiX = 96.0 * source.CompositionTarget.TransformToDevice.M11;
+                            dpiY = 96.0 * source.CompositionTarget.TransformToDevice.M22;
+                        }
+                        rate = dpiX / 96d;
 
                         Bitmap bmp = bmd.test_draw(teststrings);
                         BitmapImage cbmp = BitmapToBitmapImage(bmp);
-                        image.Height = cbmp.Height;
-                        image.Width = cbmp.Width;
+                        image.Height = cbmp.Height * rate;
+                        image.Width = cbmp.Width * rate;
                         image.Source = cbmp;
                         if (checkboxShowLine.IsChecked == true)
                         {
                             DrawingVisual drawingVisual = new DrawingVisual();
                             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
                             {
-                                //放大比例
-                                double rate = 1f;
-                                PresentationSource source = PresentationSource.FromVisual(this);
-                                double dpiX =0f, dpiY =0f;
-                                if (source != null)
-                                {
-                                    dpiX = 96.0 * source.CompositionTarget.TransformToDevice.M11;
-                                    dpiY = 96.0 * source.CompositionTarget.TransformToDevice.M22;
-                                }
-                                rate = dpiX / 96d;
+
                                 //
                                 // ... draw on the drawingContext
                                 //

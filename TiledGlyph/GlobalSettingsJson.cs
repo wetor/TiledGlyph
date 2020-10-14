@@ -34,8 +34,8 @@ namespace TiledGlyph
 
 
         public  int iFontHeight2 = 20;
-        public  int iFontSizeStartIndex = 0;
-        public  int iFontSizeEndIndex = 0;
+        public  int iFontSizeStartIndex = 550;
+        public  int iFontSizeEndIndex = 7356;
         public  int relativePositionX2 = 0;
         public  int relativePositionY2 = 0;
     }

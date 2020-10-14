@@ -178,7 +178,6 @@ namespace TiledGlyph
                             {
                                 dest = tmpBmp;
                             }
-
                             dest.Save(string.Format("{0}\\font.{1}", saveFolderName, fmt.ToString()), fmt);
                             dest.Dispose();
                             tmpBmp.Dispose();

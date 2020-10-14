@@ -41,8 +41,8 @@ namespace TiledGlyph
         {
             freetype_normal = 0,
             freetype_nearestneighbor = 1,
-            freetype_drawtwice = 2,
-            freetype_HighQualityBicubic = 3,
+            freetype_HighQualityBicubic = 2,
+            freetype_drawtwice = 3,
             freetype_nosmoothing = 4,
             freetype_custom1 = 5//for prototype font
         };
@@ -402,35 +402,65 @@ namespace TiledGlyph
                     kx = x + face.Glyph.BitmapLeft;
                     ky = (int)Math.Round((float)y + (FHD - (float)face.Glyph.Metrics.HorizontalBearingY));
                     FTBitmap ftbmp = face.Glyph.Bitmap;
-                    if (ftbmp.Width == 0)
+                    //if (ftbmp.Width == 0)
+                    //{
+                    //    x += this.tile_width;
+                    //    if (x + this.tile_width > this.image_width)
+                    //    {
+                    //        x = 0;
+                    //        y += this.tile_height;
+                    //    }
+                    //    continue;
+                    //}
+
+                    if (ftbmp.Width == 0 || x + this.tile_width > this.tile_width * 100)
                     {
                         x += this.tile_width;
-                        if (x + this.tile_width > this.image_width)
+                        if (x + this.tile_width > this.image_width || x + this.tile_width > this.tile_width * 100)
                         {
                             x = 0;
                             y += this.tile_height;
+                            linecount = 0;
+                            i--;
                         }
                         continue;
                     }
 
                     Bitmap tmpBmp = ftbmp.ToGdipBitmap(this.penColor);
 
-                    tmpBmp = kPasteImage(tmpBmp, tile_width * 2, tile_height * 2, (int)face.Glyph.BitmapLeft,
-                        (int)Math.Round(((float)this.fontHeight * 2 - face.Glyph.BitmapTop)));
+ 
+                    if (!isInFontSize2)
+                    {
+                        tmpBmp = kPasteImage(tmpBmp,
+                            tile_width * 2,
+                            tile_height * 2,
+                            (int)face.Glyph.BitmapLeft + GlobalSettings.relativePositionX * 2,
+                            (int)Math.Round(((float)this.fontHeight * 2 - face.Glyph.BitmapTop)) + GlobalSettings.relativePositionY * 2);
+                    }
+                    else
+                    {
+                        tmpBmp = kPasteImage(tmpBmp,
+                            tile_width * 2,
+                            tile_height * 2,
+                            (int)face.Glyph.BitmapLeft + GlobalSettings.relativePositionX2 * 2,
+                            (int)Math.Round(((float)this.fontHeight * 2 - face.Glyph.BitmapTop)) + GlobalSettings.relativePositionY2 * 2);
+                    }
 
                     Bitmap cBmp = kResizeImage(tmpBmp, tmpBmp.Width / 2, tmpBmp.Height / 2, System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic);
                     Bitmap nBmp = gray2alpha(cBmp);
                     cBmp.Dispose();
 
-                    if (!isInFontSize2)
-                    {
-                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
-                    }
-                    else
-                    {
-                        g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
-                    }
-              
+                    g.DrawImageUnscaled(nBmp, x , y);
+                    //g.DrawImageUnscaled(nBmp, x, y);
+                    //if (!isInFontSize2)
+                    //{
+                    //    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX, y + GlobalSettings.relativePositionY);
+                    //}
+                    //else
+                    //{
+                    //    g.DrawImageUnscaled(nBmp, x + GlobalSettings.relativePositionX2, y + GlobalSettings.relativePositionY2);
+                    //}
+
                     nBmp.Dispose();
 
                 }
@@ -451,13 +481,25 @@ namespace TiledGlyph
                     kx = x + face.Glyph.BitmapLeft;
                     ky = (int)Math.Round((float)y + (FHD - (float)face.Glyph.Metrics.HorizontalBearingY));
                     FTBitmap ftbmp = face.Glyph.Bitmap;
-                    if (ftbmp.Width == 0)
+                    //if (ftbmp.Width == 0)
+                    //{
+                    //    x += this.tile_width;
+                    //    if (x + this.tile_width > this.image_width)
+                    //    {
+                    //        x = 0;
+                    //        y += this.tile_height;
+                    //    }
+                    //    continue;
+                    //}
+                    if (ftbmp.Width == 0 || x + this.tile_width > this.tile_width * 100)
                     {
                         x += this.tile_width;
-                        if (x + this.tile_width > this.image_width)
+                        if (x + this.tile_width > this.image_width || x + this.tile_width > this.tile_width * 100)
                         {
                             x = 0;
                             y += this.tile_height;
+                            linecount = 0;
+                            i--;
                         }
                         continue;
                     }
@@ -489,14 +531,18 @@ namespace TiledGlyph
             
                         if (!isInFontSize2)
                         {
-                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
-                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);//draw twice
+                            //g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+                           // g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX , ky + GlobalSettings.relativePositionY);//draw twice
+                           // g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
 
                         }
                         else
                         {
-                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2 - 1, ky + GlobalSettings.relativePositionY2 - 1);//draw twice
-                            g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);//draw twice
+                            //g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
+                          //  g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2 , ky + GlobalSettings.relativePositionY2);//draw twice
+                           // g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
 
                         }
 
@@ -529,14 +575,17 @@ namespace TiledGlyph
 
                         if (!isInFontSize2)
                         {
-                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX - 1, ky + GlobalSettings.relativePositionY - 1);//draw twice
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);//draw twice
                             g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
+                          //  g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY );//draw twice
+                         //   g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX, ky + GlobalSettings.relativePositionY);
                         }
                         else
                         {
-                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2 - 1, ky + GlobalSettings.relativePositionY2 - 1);//draw twice
+                            g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2 );//draw twice
                             g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
-
+                          //  g.DrawImageUnscaled(sBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);//draw twice
+                          //  g.DrawImageUnscaled(nBmp, kx + GlobalSettings.relativePositionX2, ky + GlobalSettings.relativePositionY2);
                         }
 
                         cBmp.Dispose();
@@ -615,6 +664,7 @@ namespace TiledGlyph
                             x = 0;
                             y += this.tile_height;
                             linecount = 0;
+                            i--;
                         }
                         continue;
                     }

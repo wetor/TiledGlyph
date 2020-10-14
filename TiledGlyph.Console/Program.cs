@@ -16,33 +16,45 @@ namespace TiledGlyph.Console
         {
             
             var gSettings = new GlobalSettingsJson();
-            if (args.Length != 3)
+            if (args.Length != 4)
             {
                 System.Console.WriteLine("第一个参数请指定设定文件的Json");
                 System.Console.WriteLine("第二个参数请指定UTF8格式保存的字体文字txt");
                 System.Console.WriteLine("第三个参数请指定输出图片文件名");
+                System.Console.WriteLine("第四个参数为字体路劲");
                 File.WriteAllText("SettingTmp.json", JsonConvert.SerializeObject(gSettings, Formatting.Indented));
                 return;
             }
             string pathJson = args[0];
             string pathFontString = args[1];
             string fontstring = "";
+            string fontpath = "";
+            if(args.Length == 4)
+            {
+                fontpath = args[3];
+            }
+
+            int linecount =File.ReadAllText(pathFontString).Length/100 +1;
             if (File.Exists(pathJson))
             {
                 gSettings = JsonConvert.DeserializeObject<GlobalSettingsJson>(File.ReadAllText(pathJson));
                 GlobalSettings.iFontHeight = gSettings.iFontHeight;
                 GlobalSettings.iTileHeight = gSettings.iTileHeight;
                 GlobalSettings.iTileWidth = gSettings.iTileWidth;
-                GlobalSettings.iImageHeight = gSettings.iImageHeight;
+                GlobalSettings.iImageHeight = gSettings.iTileHeight * linecount;
                 GlobalSettings.iImageWidth = gSettings.iImageWidth;
-                GlobalSettings.iGRenderMode = 0;//gSettings.iGRenderMode;
+                GlobalSettings.iGRenderMode = gSettings.iGRenderMode;
                 GlobalSettings.iImageCount = gSettings.iImageCount;
                 GlobalSettings.cBgColor = gSettings.cBgColor;
                 GlobalSettings.cPenColor = gSettings.cPenColor;
                 GlobalSettings.cShadowColor = gSettings.cShadowColor;
                 GlobalSettings.fTextStrings = gSettings.fTextStrings;
                 GlobalSettings.fFontName = gSettings.fFontName;
-                GlobalSettings.bUseUnlimitHeight = gSettings.bUseUnlimitHeight;
+                if (!string.IsNullOrEmpty(fontpath))
+                {
+                    GlobalSettings.fFontName = fontpath;
+                }
+                GlobalSettings.bUseUnlimitHeight = true;
                 GlobalSettings.bOptmizeAlpha = gSettings.bOptmizeAlpha;
                 GlobalSettings.globalSaveFmt = gSettings.globalSaveFmt;
 
